@@ -3,8 +3,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Word Disney Paradise</title>
+    <!-- PWA & Mobile Meta -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#ff758c">
+    <link rel="manifest" href="manifest.json">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -21,6 +27,10 @@
             background-attachment: fixed;
             overflow-x: hidden;
             color: #5d4037;
+            /* 防止移动端长按弹出菜单和点击高亮 */
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
         body::before {
             content: "";
@@ -89,23 +99,22 @@
             box-shadow: 0 8px 32px 0 rgba(255, 182, 193, 0.2);
         }
 
-        .dreamy-gradient {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+        /* 移动端全屏安全区域适配 */
+        .safe-pb {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        .safe-pt {
+            padding-top: env(safe-area-inset-top);
         }
 
         .bouncy-hover {
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .bouncy-hover:hover {
-            transform: scale(1.03) translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(255, 182, 193, 0.4);
-        }
-
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { 
-            background: rgba(255, 117, 140, 0.3); 
-            border-radius: 10px; 
+        @media (hover: hover) {
+            .bouncy-hover:hover {
+                transform: scale(1.03) translateY(-8px);
+                box-shadow: 0 25px 50px -12px rgba(255, 182, 193, 0.4);
+            }
         }
     </style>
 <script type="importmap">
@@ -122,6 +131,5 @@
 </head>
 <body class="min-h-screen">
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
 </body>
 </html>

@@ -73,13 +73,13 @@ const CharacterIcon: React.FC<{ pack: WordPack }> = ({ pack }) => {
   }, [pack]);
 
   return (
-    <div className={`w-24 h-24 mx-auto rounded-[2.5rem] ${pack.color} flex items-center justify-center shadow-2xl shadow-pink-100 group-hover:rotate-12 transition-transform overflow-hidden relative`}>
+    <div className={`w-16 h-16 sm:w-24 sm:h-24 mx-auto rounded-[1.5rem] sm:rounded-[2.5rem] ${pack.color} flex items-center justify-center shadow-lg shadow-pink-100 group-hover:rotate-12 transition-transform overflow-hidden relative`}>
       {loading ? (
-        <Loader2 className="text-pink-300 animate-spin" size={32} />
+        <Loader2 className="text-pink-300 animate-spin" size={20} />
       ) : iconUrl ? (
         <img src={iconUrl} alt={pack.character} className="w-full h-full object-cover scale-110" />
       ) : (
-        <span className="text-5xl">{pack.icon}</span>
+        <span className="text-3xl sm:text-5xl">{pack.icon}</span>
       )}
     </div>
   );
@@ -192,100 +192,96 @@ const App: React.FC = () => {
     const goalReached = state.stats.wordsLearnedToday >= state.stats.dailyGoal;
 
     return (
-      <div className="max-w-4xl mx-auto p-6 space-y-12 animate-in fade-in slide-in-from-bottom-10 duration-1000">
-        <div className="space-y-6">
-          <section className="relative h-80 rounded-[3.5rem] overflow-hidden shadow-2xl bouncy-hover">
+      <div className="max-w-4xl mx-auto px-5 py-4 sm:p-6 space-y-6 sm:space-y-10 animate-in fade-in slide-in-from-bottom-10 duration-700">
+        <div className="space-y-4">
+          <section className="relative h-48 sm:h-80 rounded-[2rem] sm:rounded-[3.5rem] overflow-hidden shadow-2xl bouncy-hover">
             <div className="absolute inset-0 bg-gradient-to-br from-[#ff9a9e] via-[#fad0c4] to-[#fad0c4] opacity-90"></div>
-            <div className="absolute top-10 right-20 w-32 h-32 bg-white/30 rounded-full blur-2xl animate-pulse"></div>
-            <div className="absolute bottom-10 left-10 w-48 h-48 bg-purple-300/20 rounded-full blur-3xl"></div>
             
-            <div className="relative h-full z-10 flex flex-col justify-center px-16 text-[#5d4037]">
-              <div className="flex items-center gap-2 mb-3 bg-white/40 w-fit px-4 py-1.5 rounded-full backdrop-blur-md border border-white/20">
-                <Heart size={14} className="text-pink-500 fill-pink-500" />
-                <span className="text-[11px] font-black uppercase tracking-widest text-pink-600">蜜蜜的梦幻乐园</span>
+            <div className="relative h-full z-10 flex flex-col justify-center px-6 sm:px-16 text-[#5d4037]">
+              <div className="flex items-center gap-2 mb-2 bg-white/40 w-fit px-3 py-1 rounded-full backdrop-blur-md border border-white/20">
+                <Heart size={10} className="text-pink-500 fill-pink-500" />
+                <span className="text-[9px] font-black uppercase tracking-widest text-pink-600">蜜蜜的梦幻乐园</span>
               </div>
-              <h2 className="text-6xl font-black mb-3 drop-shadow-sm text-pink-700">你好，蜜蜜!</h2>
-              <p className="text-xl opacity-80 font-semibold max-w-md">今天我们要探索 {state.stats.dailyGoal} 个奇妙单词，准备好开始这段魔法旅程了吗？</p>
+              <h2 className="text-3xl sm:text-6xl font-black mb-1 drop-shadow-sm text-pink-700">你好，蜜蜜!</h2>
+              <p className="text-sm sm:text-xl opacity-80 font-bold max-w-[200px] sm:max-w-md">探索今天第 {state.stats.wordsLearnedToday + 1} 个魔法单词！</p>
               
               <button 
                 onClick={() => setState(s => ({ ...s, view: View.LEARN }))}
-                className="mt-8 w-fit bg-pink-500 text-white px-12 py-4 rounded-[2rem] font-black text-xl hover:bg-pink-400 transition-all shadow-[0_8px_0_rgb(190,24,93)] active:translate-y-1 active:shadow-none flex items-center gap-2"
+                className="mt-4 sm:mt-8 w-fit bg-pink-500 text-white px-6 sm:px-12 py-2.5 sm:py-4 rounded-[1.2rem] sm:rounded-[2rem] font-black text-base sm:text-xl hover:bg-pink-400 transition-all shadow-[0_4px_0_rgb(190,24,93)] active:translate-y-1 active:shadow-none flex items-center gap-2"
               >
-                开启魔法冒险 <ChevronRight size={24} />
+                开始冒险 <ChevronRight size={18} />
               </button>
             </div>
-            <div className="absolute top-10 right-10 animate-bounce delay-75"><Star className="text-yellow-200 fill-yellow-200" size={32}/></div>
-            <div className="absolute bottom-20 right-40 animate-pulse"><Sparkles className="text-white" size={24}/></div>
           </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="pixar-card p-10 rounded-[3rem] space-y-6">
+          <div className="grid grid-cols-2 gap-3 sm:gap-8">
+            <div className="pixar-card p-4 sm:p-10 rounded-[1.5rem] sm:rounded-[3rem] flex flex-col justify-between h-32 sm:h-auto">
                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="p-4 bg-pink-50 rounded-[1.5rem] text-pink-500 shadow-inner">
-                      <BookOpen size={28} />
+                  <div className="flex items-center gap-2 sm:gap-4">
+                    <div className="p-2 sm:p-4 bg-pink-50 rounded-[0.8rem] sm:rounded-[1.5rem] text-pink-500">
+                      <BookOpen size={20} />
                     </div>
-                    <div>
-                      <h4 className="font-black text-slate-800 text-xl">今日成就</h4>
-                      <p className="text-sm text-pink-400 font-bold">目标：{state.stats.dailyGoal} 个单词</p>
+                    <div className="hidden sm:block">
+                      <h4 className="font-black text-slate-800 text-lg">今日进度</h4>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-4xl font-black text-pink-500">{state.stats.wordsLearnedToday}</div>
-                    <div className="text-[10px] text-pink-300 font-black uppercase tracking-tighter">Completed</div>
+                    <div className="text-2xl sm:text-4xl font-black text-pink-500">{state.stats.wordsLearnedToday}</div>
                   </div>
                </div>
-               <div className="relative h-5 bg-pink-50 rounded-full overflow-hidden p-1 shadow-inner">
-                  <div 
-                    className={`h-full rounded-full transition-all duration-1000 ease-out ${goalReached ? 'bg-gradient-to-r from-yellow-300 to-pink-500 shadow-[0_0_20px_rgba(236,72,153,0.4)]' : 'bg-gradient-to-r from-pink-300 to-rose-400 shadow-[0_0_15px_rgba(251,113,133,0.3)]'}`}
-                    style={{ width: `${progressPercent}%` }}
-                  />
+               <div className="space-y-1">
+                  <p className="text-[10px] sm:text-xs text-pink-400 font-black uppercase">今日目标 {state.stats.dailyGoal}</p>
+                  <div className="relative h-2 sm:h-4 bg-pink-50 rounded-full overflow-hidden p-0.5 shadow-inner">
+                    <div 
+                      className={`h-full rounded-full transition-all duration-1000 ease-out ${goalReached ? 'bg-gradient-to-r from-yellow-300 to-pink-500' : 'bg-gradient-to-r from-pink-300 to-rose-400'}`}
+                      style={{ width: `${progressPercent}%` }}
+                    />
+                  </div>
                </div>
             </div>
 
             <button 
               onClick={() => setState(s => ({ ...s, view: View.REVIEW }))}
-              className="pixar-card p-10 rounded-[3rem] flex items-center justify-between group hover:border-pink-300 transition-all relative overflow-hidden text-left"
+              className="pixar-card p-4 sm:p-10 rounded-[1.5rem] sm:rounded-[3rem] flex items-center justify-between group relative overflow-hidden h-32 sm:h-auto"
             >
-               <div className="flex items-center gap-6 relative z-10">
-                  <div className="w-20 h-20 bg-gradient-to-br from-purple-100 to-pink-50 rounded-[2rem] flex items-center justify-center text-pink-400 group-hover:scale-110 transition-transform shadow-inner">
-                    <Castle size={36} />
+               <div className="flex flex-col sm:flex-row items-center sm:items-center gap-2 sm:gap-6 relative z-10 w-full">
+                  <div className="w-12 h-12 sm:w-20 sm:h-20 bg-gradient-to-br from-purple-100 to-pink-50 rounded-[1.2rem] sm:rounded-[2rem] flex items-center justify-center text-pink-400">
+                    <Castle size={24} />
                   </div>
-                  <div>
-                    <h4 className="font-black text-slate-800 text-2xl">记忆城堡</h4>
-                    <p className="text-base text-pink-300 font-bold">守护蜜蜜学会的单词</p>
+                  <div className="text-center sm:text-left">
+                    <h4 className="font-black text-slate-800 text-sm sm:text-xl">记忆城堡</h4>
+                    {dueReviewWords.length > 0 && (
+                      <span className="text-[10px] sm:text-sm text-pink-400 font-bold">{dueReviewWords.length} 个待复习</span>
+                    )}
                   </div>
                </div>
                {dueReviewWords.length > 0 && (
-                 <div className="relative z-10 bg-rose-500 text-white w-12 h-12 rounded-full flex items-center justify-center font-black text-lg animate-bounce shadow-xl shadow-rose-200 border-4 border-white">
+                 <div className="absolute top-2 right-2 sm:static bg-rose-500 text-white w-7 h-7 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-black text-xs sm:text-base animate-bounce border-2 sm:border-4 border-white shadow-lg">
                     {dueReviewWords.length}
                  </div>
                )}
-               <div className="absolute -top-10 -right-10 p-2 opacity-[0.05] rotate-12 group-hover:rotate-0 transition-transform">
-                 <Zap size={180} />
-               </div>
             </button>
           </div>
         </div>
 
         <div>
-          <h3 className="text-3xl font-black mb-10 flex items-center gap-4 text-slate-800">
-            <div className="w-2 h-10 bg-pink-400 rounded-full"></div>
+          <h3 className="text-xl sm:text-3xl font-black mb-4 sm:mb-8 flex items-center gap-2 text-slate-800">
+            <div className="w-1 h-6 sm:w-1.5 sm:h-8 bg-pink-400 rounded-full"></div>
             魔法主题岛屿
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-8">
             {WORD_PACKS.map((pack) => (
               <button
                 key={pack.name}
                 onClick={() => {
                   setState(s => ({ ...s, currentCategory: pack.name, view: View.LEARN }));
                 }}
-                className="group p-10 rounded-[3.5rem] pixar-card hover:border-pink-200 transition-all text-center space-y-6 bouncy-hover border border-white/40"
+                className="group p-4 sm:p-10 rounded-[1.8rem] sm:rounded-[3rem] pixar-card hover:border-pink-200 transition-all text-center space-y-3 sm:space-y-4"
               >
                 <CharacterIcon pack={pack} />
                 <div>
-                  <p className="font-black text-slate-700 text-xl leading-tight">{pack.name.split(' ')[1]}</p>
-                  <div className="mt-2 text-[11px] font-black text-pink-300 uppercase tracking-widest">{pack.words.length} MAGIC WORDS</div>
+                  <p className="font-black text-slate-700 text-sm sm:text-xl leading-tight">{pack.name.split(' ')[1]}</p>
+                  <div className="mt-1 text-[8px] sm:text-[10px] font-black text-pink-300 uppercase tracking-widest">{pack.words.length} WORDS</div>
                 </div>
               </button>
             ))}
@@ -296,37 +292,32 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen pb-32">
-      {state.view !== View.REVIEW && state.view !== View.LEARN && state.view !== View.PLAY && state.view !== View.TEST && (
-        <header className="bg-white/40 backdrop-blur-2xl sticky top-0 z-50 border-b border-white/50 px-10 py-6 flex items-center justify-between">
-          <div className="flex items-center gap-4 cursor-pointer" onClick={() => setState(s => ({ ...s, view: View.HOME }))}>
-            <div className="w-14 h-14 bg-gradient-to-br from-pink-400 to-rose-500 rounded-2xl flex items-center justify-center text-white shadow-lg rotate-12 hover:rotate-0 transition-transform">
-              <Sparkles size={32} />
+    <div className="min-h-[100svh] flex flex-col bg-fixed relative">
+      {state.view === View.HOME && (
+        <header className="bg-white/40 backdrop-blur-2xl sticky top-0 z-50 border-b border-white/50 px-5 sm:px-10 py-3 sm:py-6 flex items-center justify-between safe-pt">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 sm:w-12 sm:h-12 bg-gradient-to-br from-pink-400 to-rose-500 rounded-xl flex items-center justify-center text-white shadow-lg rotate-6">
+              <Sparkles size={20} />
             </div>
             <div>
-              <h1 className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-purple-600">
-                单词迪斯尼乐园
-              </h1>
-              <div className="flex items-center gap-1.5">
-                <Heart size={10} className="text-pink-400 fill-pink-400" />
-                <p className="text-[11px] text-pink-300 font-black tracking-widest uppercase">Dreamy Edition</p>
-              </div>
+              <h1 className="text-lg sm:text-2xl font-black text-pink-600">单词乐园</h1>
+              <p className="text-[8px] text-pink-300 font-black tracking-widest uppercase">Disney Edition</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-10">
-            <div className="flex items-center gap-3 bg-pink-500 px-6 py-3 rounded-[1.5rem] shadow-[0_4px_0_rgb(190,24,93)] active:translate-y-0.5 active:shadow-none transition-all">
-              <Star className="text-white fill-white" size={22} />
-              <span className="font-black text-white text-xl">{state.stats.stars}</span>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1.5 bg-pink-500 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full shadow-lg">
+              <Star className="text-white fill-white" size={14} />
+              <span className="font-black text-white text-sm sm:text-base">{state.stats.stars}</span>
             </div>
-            <button onClick={() => setState(s => ({ ...s, view: View.PARENT }))} className="p-3 bg-white/50 hover:bg-white rounded-2xl text-pink-400 transition-colors border border-white/30">
-              <Settings size={28} />
+            <button onClick={() => setState(s => ({ ...s, view: View.PARENT }))} className="p-2 sm:p-3 bg-white/50 rounded-xl text-pink-400">
+              <Settings size={20} />
             </button>
           </div>
         </header>
       )}
       
-      <main>
+      <main className="flex-1 overflow-y-auto pb-28">
         {state.view === View.HOME && renderHome()}
         {state.view === View.LEARN && (
           <LearnView 
@@ -367,45 +358,49 @@ const App: React.FC = () => {
         )}
       </main>
 
-      <nav className="fixed bottom-8 left-1/2 -translate-x-1/2 w-fit bg-white/60 backdrop-blur-3xl border-2 border-white/40 flex items-center gap-4 p-4 z-50 rounded-[3rem] shadow-2xl">
+      {/* Optimized Bottom Navigation */}
+      <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] max-w-sm bg-white/80 backdrop-blur-3xl border border-white/50 flex items-center justify-around p-2.5 z-50 rounded-[2rem] shadow-2xl safe-pb">
         {[
-          { icon: <BookOpen />, label: '魔法学习', view: View.LEARN },
-          { icon: <RotateCcw />, label: '复习城堡', view: View.REVIEW },
+          { icon: <BookOpen />, label: '学习', view: View.LEARN },
+          { icon: <RotateCcw />, label: '复习', view: View.REVIEW },
           { icon: <Gamepad2 />, label: '游乐场', view: View.PLAY },
-          { icon: <User />, label: '家长岛', view: View.PARENT },
+          { icon: <User />, label: '家长', view: View.PARENT },
         ].map((item) => (
           <button
             key={item.label}
-            onClick={() => setState(s => ({ ...s, view: item.view }))}
-            className={`flex items-center gap-3 px-8 py-4 rounded-[2rem] transition-all font-black text-sm ${
+            onClick={() => {
+               if (navigator.vibrate) navigator.vibrate(10);
+               setState(s => ({ ...s, view: item.view }));
+            }}
+            className={`flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-all ${
               state.view === item.view 
-                ? 'bg-pink-500 text-white shadow-xl shadow-pink-200' 
-                : 'text-pink-300 hover:text-pink-500 hover:bg-pink-50/50'
+                ? 'text-pink-600' 
+                : 'text-pink-200'
             }`}
           >
             {React.cloneElement(item.icon as React.ReactElement, { size: 22 })}
-            <span className="tracking-wide">{item.label}</span>
+            <span className="text-[9px] font-black">{item.label}</span>
           </button>
         ))}
       </nav>
 
       {showWarning && (
-        <div className="fixed inset-0 bg-pink-900/40 backdrop-blur-xl z-[100] flex items-center justify-center p-8">
-          <div className="bg-white rounded-[4rem] p-16 max-w-md w-full text-center space-y-10 shadow-2xl border-4 border-pink-100">
-            <div className="w-28 h-28 bg-pink-100 text-pink-500 rounded-full flex items-center justify-center mx-auto shadow-inner">
-              <ShieldCheck size={64} />
+        <div className="fixed inset-0 bg-pink-900/40 backdrop-blur-xl z-[100] flex items-center justify-center p-6">
+          <div className="bg-white rounded-[2.5rem] p-8 max-w-xs w-full text-center space-y-6 shadow-2xl">
+            <div className="w-16 h-16 bg-pink-100 text-pink-500 rounded-full flex items-center justify-center mx-auto">
+              <ShieldCheck size={40} />
             </div>
-            <div className="space-y-4">
-              <h3 className="text-4xl font-black text-pink-700 tracking-tight leading-tight">蜜蜜宝贝，<br/>让眼睛休息一下吧！</h3>
-              <p className="text-slate-500 font-bold text-lg leading-relaxed">
-                你已经很努力啦！现在去窗边看看远处的风景，或者和爸爸妈妈分享一下你的魔法新单词吧！
+            <div className="space-y-2">
+              <h3 className="text-2xl font-black text-pink-700">该休息啦！</h3>
+              <p className="text-slate-500 font-bold text-sm">
+                蜜蜜已经学习很久了，休息一下眼睛吧！
               </p>
             </div>
             <button 
               onClick={() => { setShowWarning(false); setTimeLeft(15 * 60); }}
-              className="w-full bg-pink-500 text-white py-6 rounded-[2.5rem] font-black text-2xl hover:bg-pink-600 transition-all shadow-[0_8px_0_rgb(190,24,93)] active:translate-y-1 active:shadow-none"
+              className="w-full bg-pink-500 text-white py-4 rounded-[1.5rem] font-black text-lg shadow-lg"
             >
-              我知道啦，去休息！
+              我知道了
             </button>
           </div>
         </div>
