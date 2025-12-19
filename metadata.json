@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Copy of Word Disney Paradise (单词迪斯尼乐园)",
+  "description": "A magical, gamified English learning app for kids featuring Disney-style illustrations, AI-powered pronunciation, and interactive games to make vocabulary building fun and effortless.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
